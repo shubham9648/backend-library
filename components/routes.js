@@ -18,7 +18,7 @@ router.post("/",async (req,resp,next)=>{
      await book.save();
 
      if(!book){
-       return resp.send(404).json({message:"error"});
+       return resp.send(404).json({message:"Can't add this item"});
      }
      return resp.status(200).json({book})
 });
@@ -27,7 +27,7 @@ router.get("/",async(req,resp,next)=>{
     let books;
     books = await Book.find();
     if(!books){
-        return resp.send(404).json({message:"error"});
+        return resp.send(404).json({message:"Cant fetch"});
       }
       return resp.status(200).json({books})
 })
@@ -36,7 +36,7 @@ router.get("/:id",async(req,resp,next)=>{
     let book;
     book = await Book.findById(id);
     if(!book){
-        return resp.send(404).json({message:"error"});
+        return resp.send(404).json({message:"Can't get request"});
       }
       return resp.status(200).json({book})
 });
@@ -53,18 +53,18 @@ router.put("/:id",async(req,resp,next)=>{
         image
     }); await book.save();
     if(!book){
-        return resp.send(404).json({message:"error"});
+        return resp.send(404).json({message:"Can't Update,Enter valid details"});
       }
-      return resp.status(200).json({book})
+      return resp.status(200).json({message:"updated"});
 });
 
 router.delete("/:id",async(req,resp,next)=>{
     const id = req.params.id;
     let book = await Book.findByIdAndRemove(id);
     if(!book){
-        return resp.send(404).json({message:"error"});
+        return resp.send(404).json({message:"Can't Delete"});
       }
-      return resp.status(200).json({book})
+      return resp.status(200).json({message:"Item Deleted"})
 });
 
 module.exports = router;
